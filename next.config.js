@@ -1,8 +1,17 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Skip type checking and linting during build to avoid errors
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
-}
-module.exports = nextConfig
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/",
+          destination: "/marathon",
+          has: [{ type: "host", value: "marathon.shashank.app" }],
+        },
+      ],
+    };
+  },
+};
+module.exports = nextConfig;
